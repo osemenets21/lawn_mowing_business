@@ -9,6 +9,7 @@ import Contact from './pages/Contact';
 import Services from './pages/Services';
 import Team from './pages/Team';
 import Gallery from './pages/Gallery';
+import PageNotFound from './pages/PageNotFound';
 
 
 
@@ -24,7 +25,7 @@ const App = () => (
         <Route path="/services" element={<Services />} />
         <Route path="/team" element={<Team />} />
         <Route path="/gallery" element={<Gallery />} />
-        <Route path="*" element={<h1>404 - Page Not Found</h1>} />
+        <Route path="*" element={<PageNotFound/>} />
       </Routes>
   
 
