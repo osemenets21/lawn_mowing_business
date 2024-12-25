@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import ClientCounter from "../components/ClientsCounter";
 import ClientCarousel from "./ClientCarousel";
 
@@ -128,7 +128,7 @@ const Home = () => {
   const autoScrollRef2 = React.useRef(null);
   const touchRef1 = React.useRef(null);
   const touchRef2 = React.useRef(null);
-  const maxIndex = Math.ceil(photos.length / 2) - 1;
+  // const maxIndex = Math.ceil(photos.length / 2) - 1;
 
   useEffect(() => {
     const maxIndex1 = Math.ceil(photos.length / 2) + 1; // Враховуємо 2 елементи в рядку
@@ -145,15 +145,15 @@ const Home = () => {
 
   const startAutoScroll = (setter, maxIndex, ref) => {
     if (ref.current) {
-      clearInterval(ref.current); 
+      clearInterval(ref.current);
     }
 
     ref.current = setInterval(() => {
       setter((prevIndex) => {
         if (prevIndex >= maxIndex) {
-          return 0; 
+          return 0;
         }
-        return prevIndex + 1; 
+        return prevIndex + 1;
       });
     }, 8000);
   };
@@ -201,13 +201,13 @@ const Home = () => {
     } else if (deltaX < 0) {
       currentIndexSetter((prevIndex) => {
         if (prevIndex >= maxIndex) {
-          return maxIndex; 
+          return maxIndex;
         }
         return prevIndex + 1;
       });
     }
 
-    ref.current = null; 
+    ref.current = null;
   };
 
   const toggleShowMore = () => {
@@ -218,7 +218,7 @@ const Home = () => {
     const handleResize = () => {
       if (window.innerWidth < 768) {
         setMobileView(true);
-        setShowMore(false)
+        setShowMore(false);
       } else {
       }
 
@@ -237,190 +237,188 @@ const Home = () => {
 
   return (
     <div>
-       <main>
-      {mobileView ? (
-        <div>
-          <div className="relative">
-            {/* Карусель фотографій 1 */}
-            <div
-              className="overflow-x-scroll scroll-snap-x-mandatory flex"
-              onTouchStart={(e) => handleTouchStart(e, touchRef1)}
-              onTouchMove={(e) =>
-                handleTouchMove(
-                  e,
-                  touchRef1,
-                  currentIndex1,
-                  setCurrentIndex1,
-                  Math.ceil(photos.length / 2) - 1
-                )
-              }
-              onTouchEnd={(e) =>
-                handleTouchEnd(
-                  e,
-                  autoScrollRef1,
-                  setCurrentIndex1,
-                  Math.ceil(photos.length / 2) - 1
-                )
-              }
-            >
+      <main>
+        {mobileView ? (
+          <div>
+            <div className="relative">
+              {/* Карусель фотографій 1 */}
               <div
-                className="flex collage-container transition-transform duration-500"
-                style={{
-                  transform: `translateX(-${currentIndex1 * 50}%)`,
-                }}
+                className="overflow-x-scroll scroll-snap-x-mandatory flex"
+                onTouchStart={(e) => handleTouchStart(e, touchRef1)}
+                onTouchMove={(e) =>
+                  handleTouchMove(
+                    e,
+                    touchRef1,
+                    currentIndex1,
+                    setCurrentIndex1,
+                    Math.ceil(photos.length / 2) - 1
+                  )
+                }
+                onTouchEnd={(e) =>
+                  handleTouchEnd(
+                    e,
+                    autoScrollRef1,
+                    setCurrentIndex1,
+                    Math.ceil(photos.length / 2) - 1
+                  )
+                }
               >
-                {photos.map((photo, index) => (
-                  <div
-                    key={index}
-                    className="relative w-1/2 flex-shrink-0 px-1"
-                  >
-                    <div className="image-wrapper">
-                      <img
-                        src={photo[2]}
-                        alt={photo[1]}
-                        className="object-cover rounded-lg small-pic"
-                      />
-                      <div className="overlay">
-                        <h3 className="image-title">{photo[1]}</h3>
+                <div
+                  className="flex collage-container transition-transform duration-500"
+                  style={{
+                    transform: `translateX(-${currentIndex1 * 50}%)`,
+                  }}
+                >
+                  {photos.map((photo, index) => (
+                    <div
+                      key={index}
+                      className="relative w-1/2 flex-shrink-0 px-1"
+                    >
+                      <div className="image-wrapper">
+                        <div className="image-container">
+                          <img
+                            src={photo[2]}
+                            alt={photo[1]}
+                            className="object-cover rounded-lg small-pic"
+                          />
+                          <div className="image-description">{photo[1]}</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="relative mt-3">
-            {/* Карусель фотографій 2 */}
-            <div
-              className="overflow-x-scroll scroll-snap-x-mandatory flex"
-              onTouchStart={(e) => handleTouchStart(e, touchRef2)}
-              onTouchMove={(e) =>
-                handleTouchMove(
-                  e,
-                  touchRef2,
-                  currentIndex2,
-                  setCurrentIndex2,
-                  Math.ceil(photos2.length / 2) - 1
-                )
-              }
-              onTouchEnd={(e) =>
-                handleTouchEnd(
-                  e,
-                  autoScrollRef2,
-                  setCurrentIndex2,
-                  Math.ceil(photos2.length / 2) - 1
-                )
-              }
-            >
+            <div className="relative mt-3">
+              {/* Карусель фотографій 2 */}
               <div
-                className="flex transition-transform duration-500"
-                style={{
-                  transform: `translateX(-${currentIndex2 * 50}%)`,
-                }}
+                className="overflow-x-scroll scroll-snap-x-mandatory flex"
+                onTouchStart={(e) => handleTouchStart(e, touchRef2)}
+                onTouchMove={(e) =>
+                  handleTouchMove(
+                    e,
+                    touchRef2,
+                    currentIndex2,
+                    setCurrentIndex2,
+                    Math.ceil(photos2.length / 2) - 1
+                  )
+                }
+                onTouchEnd={(e) =>
+                  handleTouchEnd(
+                    e,
+                    autoScrollRef2,
+                    setCurrentIndex2,
+                    Math.ceil(photos2.length / 2) - 1
+                  )
+                }
               >
-                {photos2.map((photo, index) => (
-                  <div
-                    key={index}
-                    className="relative w-1/2 flex-shrink-0 px-1"
-                  >
-                    <div className="image-wrapper">
-                      <img
-                        src={photo[2]}
-                        alt={photo[1]}
-                        className="object-cover rounded-lg small-pic"
-                      />
-                      <div className="overlay">
-                        <h3 className="image-title">{photo[1]}</h3>
+                <div
+                  className="flex transition-transform duration-500"
+                  style={{
+                    transform: `translateX(-${currentIndex2 * 50}%)`,
+                  }}
+                >
+                  {photos2.map((photo, index) => (
+                    <div
+                      key={index}
+                      className="relative w-1/2 flex-shrink-0 px-1"
+                    >
+                      <div className="image-wrapper">
+                        <div className="image-container">
+                          <img
+                            src={photo[2]}
+                            alt={photo[1]}
+                            className="object-cover rounded-lg small-pic"
+                          />
+                          <div className="image-description">{photo[1]}</div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ) : (
-        <div>
+        ) : (
+          <div>
+            <div className="w-full max-w-7xl p-5 pb-5 mx-auto gap-5 md:columns-2 lg:columns-3 space-y-5">
+              <img
+                alt="gallery"
+                src={services.AutumnCare[2]}
+                className="big-pic"
+              />
+              <img
+                alt="gallery"
+                src={services.CrystalPonds[2]}
+                className="small-pic"
+              />
+              <img
+                alt="gallery"
+                src={services.Cleanliness[1]}
+                className="small-pic"
+              />
+              <img
+                alt="gallery"
+                src={services.BasementRefresh[1]}
+                className="big-pic"
+              />
+              <img
+                alt="gallery"
+                src={services.GreeneryLandscaping[3]}
+                className="big-pic "
+              />
+              <img
+                alt="gallery"
+                src={services.DebrisRemoval[1]}
+                className="small-pic"
+              />
+            </div>
+            <div className="flex justify-center mt-6">
+              <button
+                className="show-more-btn text-white font-bold py-2 px-10"
+                onClick={toggleShowMore}
+              >
+                {showMore ? "hide more" : "show more"}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {showMore && (
           <div className="w-full max-w-7xl p-5 pb-5 mx-auto gap-5 md:columns-2 lg:columns-3 space-y-5">
+            <img alt="gallery" src={services.Handyman[1]} className="big-pic" />
             <img
               alt="gallery"
-              src={services.AutumnCare[2]}
-              className="big-pic"
-            />
-            <img
-              alt="gallery"
-              src={services.CrystalPonds[2]}
+              src={services.GutterCare[1]}
               className="small-pic"
             />
             <img
               alt="gallery"
-              src={services.Cleanliness[1]}
+              src={services.HolidayMagic[1]}
               className="small-pic"
             />
             <img
               alt="gallery"
-              src={services.BasementRefresh[1]}
+              src={services.MovingServices[1]}
               className="big-pic"
             />
             <img
               alt="gallery"
-              src={services.GreeneryLandscaping[3]}
+              src={services.PowerWashPro[1]}
               className="big-pic "
             />
             <img
               alt="gallery"
-              src={services.DebrisRemoval[1]}
+              src={services.WinterCare[1]}
               className="small-pic"
             />
           </div>
-          <div className="flex justify-center mt-6">
-            <button
-              className="show-more-btn text-white font-bold py-2 px-10"
-              onClick={toggleShowMore}
-            >
-              {showMore ? "hide more" : "show more"}
-            </button>
-          </div>
-        </div>
-      )}
-
-      {showMore && (
-        <div className="w-full max-w-7xl p-5 pb-5 mx-auto gap-5 md:columns-2 lg:columns-3 space-y-5">
-          <img alt="gallery" src={services.Handyman[1]} className="big-pic" />
-          <img
-            alt="gallery"
-            src={services.GutterCare[1]}
-            className="small-pic"
-          />
-          <img
-            alt="gallery"
-            src={services.HolidayMagic[1]}
-            className="small-pic"
-          />
-          <img
-            alt="gallery"
-            src={services.MovingServices[1]}
-            className="big-pic"
-          />
-          <img
-            alt="gallery"
-            src={services.PowerWashPro[1]}
-            className="big-pic "
-          />
-          <img
-            alt="gallery"
-            src={services.WinterCare[1]}
-            className="small-pic"
-          />
-        </div>
-      )}
-
-    </main>
-    <ClientCounter/>
-    <ClientCarousel/>
+        )}
+      </main>
+      <ClientCarousel />
+      <ClientCounter />
     </div>
-   
   );
 };
 

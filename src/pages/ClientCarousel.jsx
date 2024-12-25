@@ -4,8 +4,6 @@ const ClientCarousel = () => {
   const reviews = [
     require("../images/google_reviews/1.png"),
     require("../images/google_reviews/2.png"),
-    require("../images/google_reviews/3.png"),
-    require("../images/google_reviews/4.png"),
     require("../images/google_reviews/5.png"),
     require("../images/google_reviews/6.png"),
     require("../images/google_reviews/7.png"),
@@ -31,7 +29,7 @@ const ClientCarousel = () => {
   return (
     <section className="client-carousel">
       <h2>
-        What <span>Our Clients</span> Say
+        What <span>Our Costumers</span> Say
       </h2>
       <div className="carousel-container">
         <button className="prev-button" onClick={handlePrev}>
